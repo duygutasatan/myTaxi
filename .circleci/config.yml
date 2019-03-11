@@ -20,8 +20,21 @@ jobs:
 
 
     - run:
+        name: Setup emulator
+        command: echo no | avdmanager create avd -n testEmulator -k "system-images;android-24;default;armeabi-v7a"
+
+    - run:
+        name: Launch emulator
+        command: /opt/android-sdk-linux/emulator/emulator -avd testEmulator -no-audio -no-window
+        background: true
+
+    - run:
         name: Run Tests
         command: ./gradlew lint test
+
+    - run:
+        name: waiting for system to boot
+        command: circle-android wait-for-boot
 
     - run:
         name: Run Instrument Tests MyTaxi
