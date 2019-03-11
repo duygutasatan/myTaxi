@@ -23,6 +23,9 @@ jobs:
         name: Run Tests
         command: ./gradlew lint test
 
+    - run:
+        name: Run Instrument Tests MyTaxi
+        command:  ./gradlew connectedAndroidTest --stacktrace
 
 
     - store_artifacts:
