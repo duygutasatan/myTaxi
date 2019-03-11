@@ -16,18 +16,20 @@ jobs:
     - run:
         name: Download Dependencies
         command: ./gradlew androidDependencies
+
     - save_cache:
         paths:
         - ~/.gradle
         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+
     - run:
         name: Setup Emulator
         command: sdkmanager "system-images;android-23;google_apis;x86"
 
 
-  - run:
-      name: Setup Emulator 2
-      command: savdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
+    - run:
+        name: Setup Emulator 2
+        command: savdmanager create avd -n test -k "system-images;android-22;default;armeabi-v7a"
 
     - run:
         name: Run Emulator
